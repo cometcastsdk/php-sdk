@@ -6,11 +6,10 @@
 
 ```
 tests/
-├── Unit/           # 單元測試
-│   └── OpenapiTest.php
-├── Feature/        # 功能測試
-│   └── ExampleFeatureTest.php
-└── bootstrap.php   # 測試啟動檔案
+├── OpenapiTest.php           # Openapi 類別測試
+├── OpenIdProviderTest.php    # OpenIdProvider 類別測試
+├── OpenIdResourceOwnerTest.php # OpenIdResourceOwner 類別測試
+└── bootstrap.php             # 測試啟動檔案
 ```
 
 ## 可用的測試命令
@@ -20,23 +19,13 @@ tests/
 composer test
 ```
 
-### 執行單元測試
-```bash
-composer test-unit
-```
-
-### 執行功能測試
-```bash
-composer test-feature
-```
-
 ### 生成覆蓋率報告
 
 #### HTML 格式覆蓋率報告
 ```bash
 composer test-coverage
 ```
-報告將生成在 `coverage-html/` 目錄中
+報告將生成在 `coverage/` 目錄中
 
 #### 文字格式覆蓋率報告
 ```bash
@@ -54,13 +43,34 @@ composer test-coverage-clover
 - 測試結果會輸出到 `test-results.xml`
 - 覆蓋率報告會生成多種格式：HTML、文字、Clover XML
 
+## 測試涵蓋範圍
+
+### OpenIdProvider 測試
+- 建構函式參數處理
+- 授權 URL 生成
+- 存取權杖 URL 生成
+- 資源擁有者詳細資訊 URL 生成
+- 預設範圍設定
+- PKCE 方法處理
+- 錯誤回應檢查
+- 資源擁有者建立
+
+### OpenIdResourceOwner 測試
+- 所有屬性的取得方法
+- 空值和部分資料處理
+- 陣列轉換功能
+
+### Openapi 測試
+- 基本功能測試
+- 版本資訊取得
+
 ## 編寫測試
 
 ### 單元測試範例
 ```php
 <?php
 
-namespace Cometcast\Openapi\Tests\Unit;
+namespace Cometcast\Openapi\Tests;
 
 use Cometcast\Openapi\Openapi;
 use PHPUnit\Framework\TestCase;
@@ -75,27 +85,10 @@ class YourClassTest extends TestCase
 }
 ```
 
-### 功能測試範例
-```php
-<?php
-
-namespace Cometcast\Openapi\Tests\Feature;
-
-use PHPUnit\Framework\TestCase;
-
-class YourFeatureTest extends TestCase
-{
-    public function testFeature(): void
-    {
-        // 測試整合功能
-        $this->assertTrue(true);
-    }
-}
-```
-
 ## 注意事項
 
 1. 測試檔案必須以 `Test.php` 結尾
 2. 測試類別必須繼承 `PHPUnit\Framework\TestCase`
 3. 測試方法必須以 `test` 開頭或使用 `@test` 註解
 4. 所有測試相關的檔案都已加入 `.gitignore`
+5. 使用 `@covers` 註解指定測試涵蓋的類別

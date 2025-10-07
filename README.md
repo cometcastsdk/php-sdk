@@ -1,4 +1,4 @@
-# Very short description of the package
+# Cometcast PHP SDK
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/cometcast/openapi-php-sdk.svg?style=flat-square)](https://packagist.org/packages/cometcast/openapi-php-sdk)
 [![Total Downloads](https://img.shields.io/packagist/dt/cometcast/openapi-php-sdk.svg?style=flat-square)](https://packagist.org/packages/cometcast/openapi-php-sdk)
